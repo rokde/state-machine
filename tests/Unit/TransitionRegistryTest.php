@@ -14,7 +14,6 @@ it('can set a transition by BackedEnum', function () {
     expect($registry->transition(OrderState::New, OrderEvent::Pay))->toBeInstanceOf(Transition::class);
 
     expect($registry->transitions())->toBeArray();
-    expect($registry->transitions(OrderState::New))->toBeArray();
 });
 
 it('can set a transition by Enum', function () {
@@ -24,7 +23,6 @@ it('can set a transition by Enum', function () {
     expect($registry->transition(ArticleState::New, ArticleEvent::Publish))->toBeInstanceOf(Transition::class);
 
     expect($registry->transitions())->toBeArray();
-    expect($registry->transitions(ArticleState::New))->toBeArray();
 });
 
 it('can set a transition by string', function () {
@@ -34,5 +32,4 @@ it('can set a transition by string', function () {
     expect($registry->transition(OrderState::New->value, OrderEvent::Pay->value))->toBeInstanceOf(Transition::class);
 
     expect($registry->transitions())->toBeArray();
-    expect($registry->transitions(OrderState::New->value))->toBeArray();
 });

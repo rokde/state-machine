@@ -38,14 +38,11 @@ class TransitionRegistry
         return $this;
     }
 
-    public function transitions(BackedEnum|UnitEnum|string|null $state = null): array
+    /**
+     * @return array<string, array<string, Transition>>
+     */
+    public function transitions(): array
     {
-        if ($state !== null) {
-            $stateKey = $this->resolveKey($state);
-
-            return $this->transitions[$stateKey] ?? [];
-        }
-
         return $this->transitions;
     }
 
