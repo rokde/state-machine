@@ -30,6 +30,9 @@ final readonly class RegistryMermaidTransformer implements RegistryTransformer
         return implode("\n", $lines)."\n";
     }
 
+    /**
+     * @param  array<int, string>  $lines
+     */
     private function buildDirection(array &$lines): void
     {
         if ($this->direction === MermaidDirection::TOP) {
