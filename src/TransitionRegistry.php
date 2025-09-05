@@ -58,10 +58,10 @@ class TransitionRegistry
         return $this->transitions[$stateKey][$eventKey] ?? throw new RuntimeException('There is no transition registered for the given state and event.');
     }
 
-    private function resolveKey(BackedEnum|UnitEnum|string $currentState): string|int
+    private function resolveKey(BackedEnum|UnitEnum|string $currentState): string
     {
         return $currentState instanceof BackedEnum
-            ? $currentState->value
+            ? (string) $currentState->value
             : ($currentState instanceof UnitEnum
                 ? $currentState->name
                 : $currentState
