@@ -42,6 +42,9 @@ it('transition registry holds the business process', function (): void {
 
     $sm = new Rokde\StateMachine\StateMachine($registry);
 
+    $canApply = $sm->canApply(OrderState::New, OrderEvent::Pay, $context);
+    expect($canApply)->toBeTrue();
+
     $result = $sm->apply(OrderState::New, OrderEvent::Pay, $context);
 
     expect($result)->toBe(OrderState::Paid);
@@ -83,6 +86,9 @@ it('blocks payment without authorization with guard', function (): void {
 
     $sm = new Rokde\StateMachine\StateMachine($registry);
 
+    $canApply = $sm->canApply(OrderState::New, OrderEvent::Pay, $context);
+    expect($canApply)->toBeFalse();
+
     $this->expectException(RuntimeException::class);
     $this->expectExceptionMessage('The guard failed.');
 
@@ -120,6 +126,9 @@ it('rejects invalid transition', function (): void {
     );
 
     $sm = new Rokde\StateMachine\StateMachine($registry);
+
+    $canApply = $sm->canApply(OrderState::Shipped, OrderEvent::Pay, $context);
+    expect($canApply)->toBeFalse();
 
     $this->expectException(RuntimeException::class);
     $this->expectExceptionMessage('There is no transition registered for the given state and event.');

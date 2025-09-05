@@ -31,4 +31,19 @@ final readonly class StateMachine
 
         return $transition->to;
     }
+
+    public function canApply(UnitEnum|string $currentState, UnitEnum|string $event, mixed $context): bool
+    {
+        try {
+            $transition = $this->registry->transition($currentState, $event);
+        } catch (\Throwable) {
+            return false;
+        }
+
+        if (! ($transition->guard)($context)) {
+            return false;
+        }
+
+        return true;
+    }
 }
