@@ -37,14 +37,7 @@ it('can generate mermaid diagrams', function () {
 
     $mermaid = $transformer->transform($registry);
 
-    expect($mermaid)->toBe(<<<'MERMAID'
-stateDiagram-v2
-  new --> paid : pay
-  new --> cancelled : cancel
-  paid --> shipped : ship
-
-MERMAID
-    );
+    expect($mermaid)->toBe("stateDiagram-v2\n  new --> paid : pay\n  new --> cancelled : cancel\n  paid --> shipped : ship\n");
 });
 
 it('can generate mermaid diagrams with display direction configured', function () {
@@ -75,15 +68,7 @@ it('can generate mermaid diagrams with display direction configured', function (
 
     $mermaid = $transformer->transform($registry);
 
-    expect($mermaid)->toBe(<<<'MERMAID'
-stateDiagram-v2
-  direction LR
-  new --> paid : pay
-  new --> cancelled : cancel
-  paid --> shipped : ship
-
-MERMAID
-    );
+    expect($mermaid)->toBe("stateDiagram-v2\n  direction LR\n  new --> paid : pay\n  new --> cancelled : cancel\n  paid --> shipped : ship\n");
 });
 
 it('can generate the README example article lifecycle', function () {
@@ -123,15 +108,5 @@ it('can generate the README example article lifecycle', function () {
     $transformer = new RegistryMermaidTransformer;
     $mermaid = $transformer->transform($articleRegistry);
 
-    expect($mermaid)->toBe(<<<'MERMAID'
-stateDiagram-v2
-  Draft --> InReview : Submit
-  Draft --> Draft : Update
-  InReview --> Scheduled : Approve
-  InReview --> Draft : Update
-  Scheduled --> Published : Publish
-  Published --> Archived : Archive
-
-MERMAID
-    );
+    expect($mermaid)->toBe("stateDiagram-v2\n  Draft --> InReview : Submit\n  Draft --> Draft : Update\n  InReview --> Scheduled : Approve\n  InReview --> Draft : Update\n  Scheduled --> Published : Publish\n  Published --> Archived : Archive\n");
 });
